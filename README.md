@@ -1,8 +1,3 @@
-Thanks for the clarification! Here's your **final cleaned-up and professional `README.md`**, formatted exactly as you described — no leftover triggers, with a full DevOps-ready structure including optional sections for Docker and CI/CD.
-
----
-
-```markdown
 # 📝 Quote Manager API
 
 A cloud-based microservice built with **FastAPI**, deployed via **Render**, and maintained using a **GitHub Actions CI/CD pipeline**. This service allows users to create, read, update, and delete inspirational quotes. All endpoints are tested with `pytest`, and the API is publicly documented with Swagger.
