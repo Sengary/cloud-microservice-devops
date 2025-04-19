@@ -68,3 +68,4 @@ cd cloud-microservice-devops
 # trigger dev branch CI
 # trigger CI from dev branch
 # trigger dev branch CI
+# retry CI trigger
