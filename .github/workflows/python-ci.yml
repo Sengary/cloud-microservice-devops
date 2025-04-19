@@ -25,6 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install fastapi uvicorn pytest httpx
 
+      - name: Run flake8 lint check
+        run: |
+          pip install flake8
+          flake8 app/
+
       - name: Run tests and generate log
         run: |
           mkdir -p test-reports
