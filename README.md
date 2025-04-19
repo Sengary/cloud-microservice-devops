@@ -66,3 +66,4 @@ cd cloud-microservice-devops
 # trigger
 # re-run test artifact
 # trigger dev branch CI
+# trigger CI from dev branch
