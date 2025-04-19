@@ -103,8 +103,3 @@ Then visit: [http://localhost:8000/docs](http://localhost:8000/docs)
 - ✅ Pytest logs uploaded as GitHub Actions artifacts  
 - ✅ Branch protection enabled on `main`
 
----
-```
-
-✅ Copy-paste this into your `README.md` to finalize.  
-Let me know when it's committed or if you want help pushing it to `main`, `dev`, and `staging`.
