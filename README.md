@@ -48,11 +48,11 @@ Use `/docs` for testing all endpoints through Swagger UI.
 
 ## 📦 Tech Stack
 
-- 🐍 Python + FastAPI
-- 🚀 Uvicorn (ASGI server)
-- 🧪 Pytest for testing
-- 🔁 GitHub Actions for CI
-- ☁️ Render.com for cloud deployment
+- 🐍 Python + FastAPI  
+- 🚀 Uvicorn (ASGI server)  
+- 🧪 Pytest for testing  
+- 🔁 GitHub Actions for CI  
+- ☁️ Render.com for cloud deployment  
 
 ---
 
@@ -62,9 +62,44 @@ Use `/docs` for testing all endpoints through Swagger UI.
 ```bash
 git clone https://github.com/Sengary/cloud-microservice-devops.git
 cd cloud-microservice-devops
-# trigger
-# trigger
-# re-run test artifact
-# trigger CI from staging
-# trigger CI from staging
-# trigger CI from staging
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the App Locally
+```bash
+uvicorn app.main:app --reload
+```
+
+Then visit: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+## 🐳 Docker Support
+
+You can run the app using Docker:
+
+```bash
+# Build the image
+docker build -t quote-api .
+
+# Run the container
+docker run -d -p 8000:8000 quote-api
+```
+
+Then visit: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+## 🔐 CI/CD & Security
+
+- ✅ CI triggered on `main`, `dev`, and `staging` branches  
+- ✅ Linting using `flake8`  
+- ✅ Unit testing using `pytest`  
+- ✅ CodeQL security scanning  
+- ✅ Pytest logs uploaded as GitHub Actions artifacts  
+- ✅ Branch protection enabled on `main`
+
