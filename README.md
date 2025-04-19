@@ -62,3 +62,4 @@ Use `/docs` for testing all endpoints through Swagger UI.
 ```bash
 git clone https://github.com/Sengary/cloud-microservice-devops.git
 cd cloud-microservice-devops
+# trigger
