@@ -1,5 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
+import random
 
 # Fast API Variable
 app = FastAPI()
@@ -69,6 +70,30 @@ def update_quote(quote_id: int, updated_quote: Quote):
             quote["content"] = updated_quote.content
             return quote
     raise HTTPException(status_code=404, detail="Quote not found")
+
+@app.get("/quotes/search", response_model=list[QuoteWithID])
+def search_quotes(author: str = Query(None), content: str = Query(None)):
+    results = quotes
+
+    if author:
+        results = [q for q in results if author.lower() in q["author"].lower()]
+    if content:
+        results = [q for q in results if content.lower() in q["content"].lower()]
+
+    if not results:
+        raise HTTPException(status_code=404, detail="No matching quotes found.")
+    return results
+    
+@app.get("/quotes/random", response_model=QuoteWithID)
+def get_random_quote():
+    if not quotes:
+        raise HTTPException(status_code=404, detail="No quotes available.")
+    return random.choice(quotes)
+
+
+@app.get("/quotes/count")
+def get_quote_count():
+    return {"count": len(quotes)}
 
 
 # Added by Abdulrahman Sharqawi – validation improvement
