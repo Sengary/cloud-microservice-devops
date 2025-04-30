@@ -70,7 +70,7 @@ def update_quote(quote_id: int, updated_quote: Quote):
     raise HTTPException(status_code=404, detail="Quote not found")
 
 
-# Added by Abdulrahman Sharqawi – validation improvement
+#Added by Abdulrahman Sharqawi – validation improvement
 
 #delete quote
 
