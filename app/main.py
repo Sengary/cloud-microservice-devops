@@ -1,9 +1,9 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
+import random
 
 # Fast API Variable
 app = FastAPI()
-
 
 # Quote schema
 class Quote(BaseModel):
@@ -34,8 +34,6 @@ def health_check():
 def get_all_quotes():
     return quotes
 
-# Add quote code
-
 
 @app.post("/quotes", response_model=QuoteWithID)
 def add_quote(quote: Quote):
@@ -45,7 +43,6 @@ def add_quote(quote: Quote):
             status_code=400,
             detail="Quote content cannot be empty."
         )
-
     new_quote = quote.model_dump()
     new_quote["id"] = next_id
     quotes.append(new_quote)
@@ -58,7 +55,10 @@ def get_quote_by_id(quote_id: int):
     for quote in quotes:
         if quote["id"] == quote_id:
             return quote
-    raise HTTPException(status_code=404, detail="Quote not found")
+    raise HTTPException(
+        status_code=404,
+        detail="Quote not found"
+    )
 
 
 @app.put("/quotes/{quote_id}", response_model=QuoteWithID)
@@ -68,12 +68,10 @@ def update_quote(quote_id: int, updated_quote: Quote):
             quote["author"] = updated_quote.author
             quote["content"] = updated_quote.content
             return quote
-    raise HTTPException(status_code=404, detail="Quote not found")
-
-
-# Added by Abdulrahman Sharqawi – validation improvement
-
-# Delete quote
+    raise HTTPException(
+        status_code=404,
+        detail="Quote not found"
+    )
 
 
 @app.delete("/quotes/{quote_id}")
@@ -82,6 +80,18 @@ def delete_quote(quote_id: int):
         if quote["id"] == quote_id:
             del quotes[index]
             return {"message": "Quote deleted"}
-    raise HTTPException(status_code=404, detail="Quote not found") add something like search get by author
+    raise HTTPException(
+        status_code=404,
+        detail="Quote not found"
+    )
 
 
+@app.get("/quotes/search", response_model=list[QuoteWithID])
+def search_quotes_by_author(author: str = Query(..., min_length=1)):
+    matched = [q for q in quotes if author.lower() in q["author"].lower()]
+    if not matched:
+        raise HTTPException(
+            status_code=404,
+            detail="No quotes found for this author"
+        )
+    return matched
