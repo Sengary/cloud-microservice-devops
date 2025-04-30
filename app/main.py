@@ -21,8 +21,7 @@ quotes = []
 next_id = 1
 
 
-
-## Add multiple quotes 
+# Add multiple quotes 
 @app.post("/quotes/bulk", response_model=list[QuoteWithID])
 def add_multiple_quotes(quotes_list: List[Quote]):
     global next_id
