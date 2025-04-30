@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
+from typing import List
 
 # Fast API Variable
 app = FastAPI()
@@ -18,6 +19,23 @@ class QuoteWithID(Quote):
 # In-memory DB with auto-incrementing ID
 quotes = []
 next_id = 1
+
+
+
+## Add multiple quotes 
+@app.post("/quotes/bulk", response_model=list[QuoteWithID])
+def add_multiple_quotes(quotes_list: List[Quote]):
+    global next_id
+    added_quotes = []
+    for quote in quotes_list:
+        if not quote.content.strip():
+            continue  # skip empty content
+        new_quote = quote.model_dump()
+        new_quote["id"] = next_id
+        quotes.append(new_quote)
+        added_quotes.append(new_quote)
+        next_id += 1
+    return added_quotes
 
 
 @app.get("/")
