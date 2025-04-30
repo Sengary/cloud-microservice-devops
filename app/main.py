@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
+# Fast API Variable
 app = FastAPI()
 
 
@@ -32,6 +33,8 @@ def health_check():
 @app.get("/quotes", response_model=list[QuoteWithID])
 def get_all_quotes():
     return quotes
+
+# Add quote code
 
 
 @app.post("/quotes", response_model=QuoteWithID)
@@ -66,6 +69,11 @@ def update_quote(quote_id: int, updated_quote: Quote):
             quote["content"] = updated_quote.content
             return quote
     raise HTTPException(status_code=404, detail="Quote not found")
+
+
+# Added by Abdulrahman Sharqawi – validation improvement
+
+# Delete quote
 
 
 @app.delete("/quotes/{quote_id}")

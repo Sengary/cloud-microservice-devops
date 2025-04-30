@@ -14,7 +14,12 @@ def test_health():
     assert response.json() == {"status": "ok"}
 
 def test_add_get_update_delete_quote():
-    # Create
+
+
+
+
+    
+# Create
     quote_data = {"author": "DevOps", "content": "Automation is power."}
     post_response = client.post("/quotes", json=quote_data)
     assert post_response.status_code == 200
@@ -22,7 +27,6 @@ def test_add_get_update_delete_quote():
     assert quote["author"] == quote_data["author"]
     assert quote["content"] == quote_data["content"]
     quote_id = quote["id"]
-
     # Read
     get_response = client.get(f"/quotes/{quote_id}")
     assert get_response.status_code == 200
