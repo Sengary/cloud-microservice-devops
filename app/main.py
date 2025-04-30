@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
-import random
 
 # Fast API Variable
 app = FastAPI()
+
 
 # Quote schema
 class Quote(BaseModel):
