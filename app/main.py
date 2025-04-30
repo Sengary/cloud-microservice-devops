@@ -1,10 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-# Fast API Variable
+#Fast API Variable
 app = FastAPI()
 
 
-# Quote schema
+#Quote schema
 class Quote(BaseModel):
     author: str
     content: str
@@ -14,7 +14,7 @@ class QuoteWithID(Quote):
     id: int
 
 
-# In-memory DB with auto-incrementing ID
+#In-memory DB with auto-incrementing ID
 quotes = []
 next_id = 1
 
@@ -82,4 +82,6 @@ def delete_quote(quote_id: int):
             del quotes[index]
             return {"message": "Quote deleted"}
     raise HTTPException(status_code=404, detail="Quote not found")
+
+
 
